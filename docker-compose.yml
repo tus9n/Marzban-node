@@ -1,7 +1,7 @@
 services:
   marzban-node:
-    # build: .
-    image: gozargah/marzban-node:latest
+    build: .
+    # image: gozargah/marzban-node:latest
     restart: always
     network_mode: host
 
@@ -15,3 +15,4 @@ services:
     volumes:
       - /var/lib/marzban-node:/var/lib/marzban-node
       - /var/log/xray:/var/log/xray
+
