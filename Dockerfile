@@ -11,6 +11,10 @@ RUN apt-get update \
     && curl -L https://github.com/Gozargah/Marzban-scripts/raw/master/install_latest_xray.sh | bash \
     && rm -rf /var/lib/apt/lists/*
 
+RUN mv /usr/local/bin/xray /usr/local/bin/xray-real
+COPY xray-wrapper.sh /usr/local/bin/xray
+RUN chmod +x /usr/local/bin/xray
+
 COPY ./requirements.txt /code/
 RUN python3 -m pip install --upgrade pip setuptools \
     && pip install --no-cache-dir --upgrade -r /code/requirements.txt
@@ -29,3 +33,4 @@ COPY --from=build /usr/local/share/xray /usr/local/share/xray
 COPY . /code
 
 CMD ["bash", "-c", "python main.py"]
+
